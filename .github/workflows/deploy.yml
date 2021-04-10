@@ -1,0 +1,43 @@
+name: Elastic Beanstalk Deployment
+
+on:
+  push:
+    branches:
+      - main
+    tags:
+      - v*
+
+jobs:
+  deploy:
+    name: Deploy to EB
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push'
+
+    env:
+      NODE_VERSION: "15"
+
+    steps:
+      - name: Checkout project
+        uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ env.NODE_VERSION }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+
+      - name: Package app
+        run: |
+          yarn install
+          yarn build
+          zip -r --symlinks deploy.zip . -x '*.git*'
+
+      - name: Deploy
+        uses: einaregilsson/beanstalk-deploy@v16
+        with:
+          aws_access_key: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws_secret_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          application_name: atmos
+          environment_name: Atmos-env
+          version_label: main-${{ github.run_number }}
+          region: us-east-1
+          deployment_package: deploy.zip

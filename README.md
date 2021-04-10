@@ -1,2 +1,1 @@
-# proto
-Atmos-Sphere public prototype
+Project Atmos prototype
