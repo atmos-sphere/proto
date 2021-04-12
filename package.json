@@ -12,6 +12,7 @@
     "@material-ui/core": "^4.11.3",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
+    "file-loader": "^6.2.0",
     "next": "^10.0.0",
     "react": "17.0.1",
     "react-dom": "17.0.1"
@@ -73,7 +74,8 @@
     ],
     "rules": {
       "quotes": "off",
-      "react/react-in-jsx-scope": "off"
+      "react/react-in-jsx-scope": "off",
+      "jsx-a11y/media-has-caption": "off"
     }
   }
 }

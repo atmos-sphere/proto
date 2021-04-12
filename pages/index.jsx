@@ -47,7 +47,16 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 style={{ fontSize: "10em" }}>{text}</h1>
+        <div className="content">
+          <h1 style={{ fontSize: "10em" }}>{text}</h1>
+          <video
+            controls
+            autoPlay
+            autostart
+            src="/animals.mp4"
+            type="video/mp4"
+          />
+        </div>
       </main>
 
       <footer>Atmos Sphere</footer>
@@ -183,8 +192,21 @@ export default function Home() {
             }
           }
 
-          h1 {
+          .content {
+            display: flex;
+            flex-direction: column;
+            place-items: center;
+            place-content: center;
             animation: 4s infinite ease-in-out floating;
+          }
+
+          .content > video {
+            height: 20em;
+          }
+
+          .content > h1 {
+            padding: 0px;
+            margin: 0px;
           }
 
           @keyframes floating {
@@ -192,7 +214,7 @@ export default function Home() {
               transform: translateY(0em);
             }
             50% {
-              transform: translateY(0.1em);
+              transform: translateY(1em);
             }
             100% {
               transform: translateY(0em);
