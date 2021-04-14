@@ -1,4 +1,3 @@
-import { isMuiElement } from '@material-ui/core';
 import React, { useState, useEffect, useRef } from 'react';
 
 const AudioPlayer = ({ tracks }) => {
@@ -15,9 +14,6 @@ const AudioPlayer = ({ tracks }) => {
     const audioRef = useRef(new Audio(audioSrc));
     const intervalRef = useRef();
     const isReady = useRef(false);
-
-    // Destructure for conciseness
-	const { duration } = audioRef.current;
 
     useEffect(() => {
         if (isPlaying) {
