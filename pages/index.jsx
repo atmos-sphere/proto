@@ -2,7 +2,7 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import Head from "next/head";
 import { useEffect, useState } from "react";
-import AudioPlayer from "./components/AudioPlayer";
+import AudioPlayer from "../components/AudioPlayer";
 
 const getHello = async () => {
   try {
