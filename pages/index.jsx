@@ -2,6 +2,7 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import AudioPlayer from "../components/AudioPlayer";
 
 const getHello = async () => {
   try {
@@ -23,6 +24,24 @@ export default function Home() {
       .then(() => setLoading(false))
       .catch(setText);
   }, []);
+
+  const tracks = [
+    {
+      title: "Short Sound",
+      artist: "Test",
+      audioSrc: "/music/Short Sound.wav"
+    },
+    {
+      title: "Beyond the Fog",
+      artist: "Monster Hunter",
+      audioSrc: "/music/Monster Hunter - Beyond the fog.mp3"
+    },
+    {
+      title: "Pokke Village",
+      artist: "Monster Hunter 2",
+      audioSrc: "/music/Monster Hunter 2 - Pokke Village Theme.mp3"
+    }
+  ];
 
   return loading ? (
     <div
@@ -57,6 +76,7 @@ export default function Home() {
             type="video/mp4"
           />
         </div>
+        <AudioPlayer tracks={tracks}></AudioPlayer>
       </main>
 
       <footer>Atmos Sphere</footer>
