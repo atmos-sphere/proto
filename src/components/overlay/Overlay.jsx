@@ -1,19 +1,23 @@
 import { Fade } from "@material-ui/core";
-import { useEffect, useRef, useState } from "react";
 import { demoSpheres } from "../../domain/Sphere";
 import Tiltable from "../Tiltable";
 import Chat from "./Chat";
-import useActivityTimeout from "./hooks";
+import { useActivityTimeout } from "../../util/hooks";
 import styles from "./overlay.module.scss";
 import Sidebar from "./Sidebar";
 import SphereAvatar from "./SphereAvatar";
 import Topbar from "./Topbar";
 
-const Side = () => (
-  <Sidebar>
-    {demoSpheres.map((sphere, i) => (
+const mySpheres = [...Array(10).keys()].reduce(
+  (p) => p.concat(demoSpheres),
+  demoSpheres
+);
+
+const Side = ({ spheres, reset }) => (
+  <Sidebar reset={reset}>
+    {(spheres || mySpheres).map((sphere, i) => (
       <Tiltable
-        key={i}
+        key={`${sphere.name}-${i}`}
         className={styles.avatarContainer}
         degX={14}
         degY={18}
@@ -25,14 +29,18 @@ const Side = () => (
   </Sidebar>
 );
 
-const Overlay = ({ timeout, ...props }) => {
+const Overlay = ({ timeout, spheres, ...props }) => {
   const timeoutEnabled = timeout && timeout > 0;
-  const visible = timeoutEnabled ? useActivityTimeout(timeout) : true;
+
+  const [visible, reset] = timeoutEnabled
+    ? useActivityTimeout(timeout)
+    : [true, () => {}];
+
   return (
     <Fade in={visible}>
       <div className={styles.overlay} {...props}>
         <Topbar />
-        <Side />
+        <Side reset={reset} />
         <Chat />
       </div>
     </Fade>

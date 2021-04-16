@@ -1,27 +1,24 @@
 const Sphere = class Sphere {
-  #name;
-  #image;
-
   constructor(name, image) {
-    this.#name = name;
-    this.#image = image;
+    this._name = name;
+    this._image = image;
   }
 
   get name() {
-    return this.#name;
+    return this._name;
   }
 
   get image() {
-    return this.#image;
+    return this._image;
   }
 
   withName(name) {
-    this.#name = name;
+    this._name = name;
     return this;
   }
 
   withImage(image) {
-    this.#image = image;
+    this._image = image;
     return this;
   }
 

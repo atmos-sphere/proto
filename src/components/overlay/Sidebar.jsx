@@ -4,16 +4,13 @@ import clsx from "clsx";
 import { useState } from "react";
 import styles from "./overlay.module.scss";
 
-const Sidebar = ({ children, ...props }) => {
+const Sidebar = ({ children, reset, ...props }) => {
   const [minimized, setMinimized] = useState(false);
   const toggleMinimized = () => {
     setMinimized(!minimized);
   };
   return (
-    <div
-      className={clsx(styles.sidebar, { [styles.minimized]: minimized })}
-      {...props}
-    >
+    <div className={clsx(styles.sidebar, { [styles.minimized]: minimized })}>
       <IconButton
         className={clsx(styles.minimizeButton, {
           [styles.minimizedButton]: minimized,
@@ -24,7 +21,9 @@ const Sidebar = ({ children, ...props }) => {
         <ArrowForwardIosRoundedIcon />
       </IconButton>
       <Divider />
-      <div className={styles.sphereList}>{children}</div>
+      <div className={styles.sphereList} onScroll={reset} {...props}>
+        {children}
+      </div>
     </div>
   );
 };
