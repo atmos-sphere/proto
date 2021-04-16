@@ -6,16 +6,19 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
+    "export": "next export",
     "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
     "file-loader": "^6.2.0",
     "next": "^10.0.0",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "sass": "^1.32.8"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.30.3",
@@ -44,6 +47,9 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
     }
   },
   "babel": {
@@ -74,8 +80,14 @@
     ],
     "rules": {
       "quotes": "off",
+      "object-curly-newline": "off",
+      "implicit-arrow-linebreak": "off",
       "react/react-in-jsx-scope": "off",
-      "jsx-a11y/media-has-caption": "off"
+      "jsx-a11y/media-has-caption": "off",
+      "react/prop-types": "off",
+      "react/jsx-props-no-spreading": "off",
+      "comma-dangle": "off",
+      "no-underscore-dangle": "allowAfterThis"
     }
   }
 }
