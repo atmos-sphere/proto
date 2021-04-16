@@ -86,8 +86,7 @@
       "jsx-a11y/media-has-caption": "off",
       "react/prop-types": "off",
       "react/jsx-props-no-spreading": "off",
-      "comma-dangle": "off",
-      "no-underscore-dangle": "allowAfterThis"
+      "comma-dangle": "off"
     }
   }
 }

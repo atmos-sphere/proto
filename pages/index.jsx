@@ -34,7 +34,7 @@ export default function Home() {
     <div className={styles.container}>
       <HeaderWithFonts />
       <main>
-        <Overlay />
+        <Overlay timeout={5000} />
         <Content />
         <AudioPlayer tracks={defaultTracks} />
       </main>
