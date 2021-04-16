@@ -6,24 +6,30 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start -p $PORT",
+    "export": "next export",
     "test": "jest"
   },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
+    "@material-ui/icons": "^4.11.2",
     "axios": "^0.21.1",
     "clsx": "^1.1.1",
     "file-loader": "^6.2.0",
     "next": "^10.0.0",
+    "prop-types": "^15.7.2",
     "react": "17.0.1",
-    "react-dom": "17.0.1"
+    "react-dom": "17.0.1",
+    "styled-components": "^5.2.3"
   },
   "devDependencies": {
     "@testing-library/dom": "^7.30.3",
     "@testing-library/jest-dom": "^5.11.10",
     "@testing-library/react": "^11.2.6",
     "babel-jest": "^26.6.3",
+    "babel-plugin-styled-components": "^1.12.0",
     "eslint": "^5.16.0",
     "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^8.2.0",
     "eslint-plugin-import": "^2.22.1",
     "eslint-plugin-jsx-a11y": "^6.4.1",
     "eslint-plugin-node": "^11.1.0",
@@ -44,11 +50,24 @@
     "transform": {
       "^.+\\.(js|jsx|ts|tsx)$": "<rootDir>/node_modules/babel-jest",
       "\\.(css|less|scss|sass)$": "identity-obj-proxy"
+    },
+    "moduleNameMapper": {
+      "^.+\\.(css|less|scss)$": "identity-obj-proxy"
     }
   },
   "babel": {
     "presets": [
       "next/babel"
+    ],
+    "plugins": [
+      [
+        "styled-components",
+        {
+          "ssr": true,
+          "displayName": true,
+          "preprocess": false
+        }
+      ]
     ]
   },
   "eslintConfig": {
@@ -57,7 +76,10 @@
       "es6": true,
       "node": true
     },
-    "extends": "airbnb",
+    "extends": [
+      "airbnb",
+      "prettier"
+    ],
     "globals": {
       "Atomics": "readonly",
       "SharedArrayBuffer": "readonly"
@@ -74,8 +96,17 @@
     ],
     "rules": {
       "quotes": "off",
+      "object-curly-newline": "off",
+      "implicit-arrow-linebreak": "off",
       "react/react-in-jsx-scope": "off",
-      "jsx-a11y/media-has-caption": "off"
+      "jsx-a11y/media-has-caption": "off",
+      "react/prop-types": "off",
+      "react/jsx-props-no-spreading": "off",
+      "comma-dangle": "off",
+      "no-underscore-dangle": "off",
+      "react/no-array-index-key": "warn",
+      "react/forbid-prop-types": "warn",
+      "arrow-body-style": "warn"
     }
   }
 }
