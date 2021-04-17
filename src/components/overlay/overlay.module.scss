@@ -1,0 +1,174 @@
+@mixin selectable($selectable) {
+  -khtml-user-select: $selectable;
+  -o-user-select: $selectable;
+  -moz-user-select: $selectable;
+  -webkit-user-select: $selectable;
+  user-select: $selectable;
+}
+
+@mixin hidden-scroll-bar {
+  ::-webkit-scrollbar {
+    width: 0; /* Remove scrollbar space */
+    background: transparent; /* Optional: just make scrollbar invisible */
+  }
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+  scrollbar-width: none; /* Firefox */
+}
+
+.overlay {
+  z-index: 100;
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+.sidebar {
+  z-index: inherit;
+  position: fixed;
+  top: max(4%, 2em);
+  bottom: max(4%, 2em);
+  left: max(3%, 3em);
+
+  width: 5em;
+  height: 92%;
+  padding: 0.5em;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  color: white;
+  border-radius: 1.5em;
+  background-color: rgba(0, 0, 0, 0.95);
+
+  transition: all 0.5s cubic-bezier(0.075, 0.82, 0.165, 1);
+
+  button {
+    width: 95%;
+    transition: all 0.2s linear;
+
+    svg {
+      color: white;
+      width: inherit;
+      height: inherit;
+    }
+  }
+
+  hr {
+    width: 100%;
+    height: 0.2em;
+    margin-bottom: 0.5em;
+    border-radius: 14%;
+  }
+}
+
+.minimized {
+  height: 5em;
+
+  hr,
+  div {
+    display: none;
+  }
+}
+
+.maximizedButton {
+  transform: rotate(90deg);
+}
+
+.minimizedButton {
+  transform: rotate(-90deg);
+}
+
+.sphereList {
+  height: 95%;
+  width: 95%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  overflow: hidden;
+  overflow-y: scroll;
+  @include hidden-scroll-bar;
+
+  & > div {
+    width: 100% !important;
+    position: relative;
+    padding-top: 100%;
+    margin-top: 0.2em;
+    margin-bottom: 0.7em;
+
+    & > * {
+      position: absolute;
+      margin-top: -100%;
+      width: 100% !important;
+      height: 100% !important;
+    }
+  }
+}
+
+.avatarContainer {
+  border-radius: 50%;
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  &:hover {
+    border-radius: 20%;
+    cursor: pointer;
+  }
+}
+
+.avatar {
+  display: flex;
+  place-items: center;
+  place-content: center;
+
+  perspective: 1px;
+  border-radius: inherit;
+  background-color: rgba(63, 63, 63, 0.822);
+  transition: all 0.2s cubic-bezier(0.165, 0.84, 0.44, 1);
+
+  &:active {
+    transform: translate(0, 0.1em);
+  }
+
+  img {
+    @include selectable(none);
+    border-radius: inherit;
+    width: inherit;
+
+    display: flex;
+    place-content: center;
+    place-items: center;
+
+    font-size: 2rem;
+    font-family: "Rubik", "Cairo", sans-serif;
+  }
+}
+
+@supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+  .sidebar {
+    -webkit-backdrop-filter: blur(15px);
+    backdrop-filter: blur(15px);
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+}
+
+.topbar {
+  z-index: inherit;
+  position: fixed;
+  top: 4%;
+  right: 6%;
+
+  // TODO: Yellow border for debugging
+  border: 5px solid yellow;
+}
+
+.chat {
+  z-index: inherit;
+  position: fixed;
+  bottom: 4%;
+  right: 6%;
+
+  // TODO: Yellow border for debugging
+  border: 5px solid yellow;
+}
