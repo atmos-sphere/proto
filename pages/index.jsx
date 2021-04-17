@@ -1,5 +1,6 @@
 import Head from "next/head";
 import { AudioPlayer, defaultTracks } from "../src/components/AudioPlayer";
+import CreateSphere from "../src/components/CreateSphere";
 import Overlay from "../src/components/overlay/Overlay";
 import styles from "./index.module.scss";
 
@@ -36,6 +37,7 @@ export default function Home() {
       <main>
         <Overlay timeout={2000} />
         <Content />
+        <CreateSphere/>
         <AudioPlayer tracks={defaultTracks} />
       </main>
       <footer style={{ display: "none" }}>Atmos Sphere</footer>

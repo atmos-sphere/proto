@@ -15,7 +15,9 @@ const mySpheres = [...Array(10).keys()].reduce(
 
 const Side = ({ spheres, reset }) => (
   <Sidebar reset={reset}>
-    {(spheres || mySpheres).map((sphere, i) => (
+    {console.log(demoSpheres)}
+    {/* change demoSphere to mySpheres */}
+    {(spheres || demoSpheres).map((sphere, i) => (
       <Tiltable
         key={`${sphere.name}-${i}`}
         className={styles.avatarContainer}
