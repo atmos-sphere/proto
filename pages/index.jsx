@@ -15,7 +15,10 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <main>
-        <Overlay timeout={2000} />
+        {/* TODO: removed timeout for easier debugging, add back later */}
+        {/* <Overlay timeout={2000} /> */}
+        <Overlay />
+
         <Content />
         <AudioPlayer tracks={defaultTracks} />
       </main>
