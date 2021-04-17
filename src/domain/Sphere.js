@@ -36,10 +36,29 @@ const Sphere = class Sphere {
 };
 
 export const demoSpheres = [
-  Sphere.with({ name: "Jazz", image: "/jazz.png" }),
-  Sphere.with({ name: "Fishy", image: "/fishy.jpg" }),
-  Sphere.with({ name: "Fireplace", image: "/fireplace.svg" }),
+  Sphere.with({ name: "JAZZ", image: "/jazz.png" }),
+  Sphere.with({ name: "FISHY", image: "/fishy.jpg" }),
+  Sphere.with({ name: "FIREPLACE", image: "/fireplace.svg" }),
 ];
 
+export const sphereImages = [
+  {
+    name: 'Jazz',
+    image: '/jazz.png'
+  },
+  {
+    name: 'Fishy',
+    image: '/fishy.jpg'
+  },
+  {
+    name: 'Fireplace',
+    image: '/fireplace.svg'
+  },
+  {
+    name: 'Vercel',
+    image: '/vercel.svg'
+  }
+]
+
 export default Sphere;
-export { Sphere };
+// export { spheres };

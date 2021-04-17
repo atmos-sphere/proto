@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import styled from 'styled-components';
 import Popup from './Popup';
-import Sphere, {demoSpheres} from '../domain/Sphere'
+import Sphere, {demoSpheres, sphereImages} from '../domain/Sphere'
 
 class CreateSphere extends Component {
     constructor(props){
@@ -32,14 +32,15 @@ class CreateSphere extends Component {
     }
 
     handleChange(event){
-        this.setState({ [event.target.name]: event.target.value });
+        const setName = event.target.value.toUpperCase();
+        this.setState({ [event.target.name]: setName });
     }
 
     render() {
         return (
             <div>
                 <button onClick={this.toggleModal}>Button</button>
-                {this.state.showModal ? 
+                {this.state.showModal &&
                 <Popup title={"Create Sphere"} showModal={this.toggleModal}>
                     <form onSubmit={this.handleSubmit}>
                         <Field>
@@ -52,20 +53,17 @@ class CreateSphere extends Component {
                         <label>
                             <div>Select an Image</div>
                             <select name="image" value={this.state.image} onChange={this.handleChange}>
-                                <option value="/jazz.png">Jazz</option>
-                                <option value="/fishy.png">Fishy</option>
-                                <option value="/fireplace.svg">Fireplace</option>
+                                {sphereImages.map(sphereImage => 
+                                    <option key={sphereImage.image} value={sphereImage.image}>{sphereImage.name}</option>
+                                )}
                             </select>
                         </label>
                         </Field>
-                        <div></div>
                         <Field>
                         <input type="submit" value="Submit"/>
                         </Field>
                     </form>
-                </Popup>
-                : <></>
-                }
+                </Popup>}
             </div>
         )
     }
@@ -74,7 +72,6 @@ class CreateSphere extends Component {
 
 const Field = styled.div`
   margin-top: 10px;
-
 `
 
 

@@ -1,8 +1,10 @@
 import Head from "next/head";
 import { AudioPlayer, defaultTracks } from "../src/components/AudioPlayer";
 import CreateSphere from "../src/components/CreateSphere";
+import SearchSphere from "../src/components/SearchSphere";
 import Overlay from "../src/components/overlay/Overlay";
 import styles from "./index.module.scss";
+import {sphereImages} from "../src/domain/Sphere"; 
 
 const HeaderWithFonts = () => (
   <Head>
@@ -37,7 +39,8 @@ export default function Home() {
       <main>
         <Overlay timeout={2000} />
         <Content />
-        <CreateSphere/>
+        <CreateSphere />
+        <SearchSphere />
         <AudioPlayer tracks={defaultTracks} />
       </main>
       <footer style={{ display: "none" }}>Atmos Sphere</footer>
