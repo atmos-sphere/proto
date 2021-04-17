@@ -57,8 +57,12 @@ export const sphereImages = [
   {
     name: 'Vercel',
     image: '/vercel.svg'
+  },
+  {
+    name: "Axe",
+    image: '/axe.svg'
   }
-]
+];
 
 export default Sphere;
 // export { spheres };

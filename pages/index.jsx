@@ -1,10 +1,11 @@
 import Head from "next/head";
+import { useState } from "react";
 import { AudioPlayer, defaultTracks } from "../src/components/AudioPlayer";
 import CreateSphere from "../src/components/CreateSphere";
 import SearchSphere from "../src/components/SearchSphere";
 import Overlay from "../src/components/overlay/Overlay";
 import styles from "./index.module.scss";
-import {sphereImages} from "../src/domain/Sphere"; 
+import { demoSpheres } from "../src/domain/Sphere";
 
 const HeaderWithFonts = () => (
   <Head>
@@ -33,14 +34,16 @@ const Content = () => (
 );
 
 export default function Home() {
+  const [spheres, setSphere] = useState(demoSpheres);
+
   return (
     <div className={styles.container}>
       <HeaderWithFonts />
       <main>
-        <Overlay timeout={2000} />
+        <Overlay timeout={2000} spheres={spheres} setSphere={setSphere} />
         <Content />
-        <CreateSphere />
-        <SearchSphere />
+        <CreateSphere spheres={spheres} setSphere={setSphere} />
+        <SearchSphere spheres={spheres} setSphere={setSphere} />
         <AudioPlayer tracks={defaultTracks} />
       </main>
       <footer style={{ display: "none" }}>Atmos Sphere</footer>

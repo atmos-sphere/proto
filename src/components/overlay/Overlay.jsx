@@ -8,10 +8,10 @@ import Sidebar from "./Sidebar";
 import SphereAvatar from "./SphereAvatar";
 import Topbar from "./Topbar";
 
-const mySpheres = [...Array(10).keys()].reduce(
-  (p) => p.concat(demoSpheres),
-  demoSpheres
-);
+// const mySpheres = [...Array(10).keys()].reduce(
+//   (p) => p.concat(demoSpheres),
+//   demoSpheres
+// );
 
 const Side = ({ spheres, reset }) => (
   <Sidebar reset={reset}>
@@ -31,7 +31,7 @@ const Side = ({ spheres, reset }) => (
   </Sidebar>
 );
 
-const Overlay = ({ timeout, spheres, ...props }) => {
+const Overlay = ({ timeout, spheres, setSphere, ...props }) => {
   const timeoutEnabled = timeout && timeout > 0;
 
   const [visible, reset] = timeoutEnabled
@@ -42,7 +42,7 @@ const Overlay = ({ timeout, spheres, ...props }) => {
     <Fade in={visible}>
       <div className={styles.overlay} {...props}>
         <Topbar />
-        <Side reset={reset} />
+        <Side reset={reset} spheres={spheres} />
         <Chat />
       </div>
     </Fade>
