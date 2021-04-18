@@ -2,6 +2,8 @@ import { CircularProgress } from "@material-ui/core";
 import axios from "axios";
 import Head from "next/head";
 import { useEffect, useState } from "react";
+import Chatapp from "../components/Chatapp";
+import '../components/Chatapp.module.css';
 
 const getHello = async () => {
   try {
@@ -56,6 +58,11 @@ export default function Home() {
             src="/animals.mp4"
             type="video/mp4"
           />
+
+        </div>
+
+        <div className="ce-div-size">
+          <Chatapp />
         </div>
       </main>
 
