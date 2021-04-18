@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { AudioPlayer, defaultTracks } from "../src/components/AudioPlayer";
 import { Overlay } from "../src/components/overlay/Overlay";
+import  Chatapp from "../src/components/Chatapp";
 
 const ContentBase = styled.div`
   display: flex;
@@ -38,6 +39,7 @@ export default function Home() {
         <Overlay timeout={2000} />
         <Content />
         <AudioPlayer tracks={defaultTracks} />
+        <Chatapp />
       </main>
     </Container>
   );
