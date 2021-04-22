@@ -2,7 +2,7 @@ import { Divider, IconButton } from "@material-ui/core";
 import ArrowForwardIosRoundedIcon from "@material-ui/icons/ArrowForwardIosRounded";
 import { useState } from "react";
 import styled from "styled-components";
-import { hiddenScrollbar, OverlayItem, thickness } from "./OverlayItem";
+import { hiddenScrollbar, OverlayItem, thickness } from "../OverlayItem";
 
 // prettier-ignore
 const SidebarBase = styled(OverlayItem)`
@@ -75,9 +75,8 @@ const SphereList = styled.div`
 
 const Sidebar = ({ children, reset, ...props }) => {
   const [minimized, setMinimized] = useState(false);
-  const toggleMinimized = () => {
-    setMinimized(!minimized);
-  };
+  const toggleMinimized = () => setMinimized(!minimized);
+
   return (
     <SidebarBase $minimized={minimized}>
       <MinMaxButton $minimized={minimized} onClick={toggleMinimized}>

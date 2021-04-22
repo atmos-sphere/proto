@@ -1,14 +1,13 @@
-import { makeStyles } from "@material-ui/core";
-import clsx from "clsx";
 import { useRef } from "react";
+import styled from "styled-components";
 
-const useStyles = makeStyles(() => ({
-  tiltable: {
-    willChange: "transform",
-    transition: (speed) =>
-      `transform ${speed || 400}ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s`,
-  },
-}));
+const TiltyContainer = styled.div`
+  perspective: "1000px";
+  will-change: transform;
+  transition: ${({ $speed }) =>
+    `transform ${$speed || 400}ms cubic-bezier(0.03, 0.98, 0.52, 0.99) 0s`};
+  transform: scale3d(1, 1, 1);
+`;
 
 export default function Tiltable({
   onMouseEnter,
@@ -16,15 +15,12 @@ export default function Tiltable({
   onMouseMove,
   className,
   children,
-  classes,
   speed,
   degX,
   degY,
   deg,
   ...props
 }) {
-  const cls = classes || useStyles(speed);
-
   const tilty = useRef(null);
   const dg = { x: deg || degX || 10, y: deg || degY || 12 };
   const calcDeg = (d, p) => 2 * d * p - d;
@@ -55,9 +51,9 @@ export default function Tiltable({
   };
 
   return (
-    <div
+    <TiltyContainer
       ref={tilty}
-      className={clsx(cls.tiltable || "", className || "")}
+      className={className}
       onMouseEnter={(e) => {
         tilt(e);
         if (onMouseEnter) onMouseEnter(e);
@@ -70,9 +66,10 @@ export default function Tiltable({
         tilt(e);
         if (onMouseMove) onMouseMove(e);
       }}
+      speed={speed}
       {...props}
     >
       {children}
-    </div>
+    </TiltyContainer>
   );
 }

@@ -1,11 +1,14 @@
 import { Fade } from "@material-ui/core";
+import { useState } from "react";
 import styled from "styled-components";
-import { demoSpheres } from "../../domain/Sphere";
+import { demoMessages } from "../../domain/ChatMessage";
+import { demoSpheres, Sphere } from "../../domain/Sphere";
 import { useActivityTimeout } from "../../util/hooks";
-import Chat from "./Chat";
-import Sidebar from "./Sidebar";
-import { TiltableSphereAvatar } from "./SphereAvatar";
-import Topbar from "./Topbar";
+import Chat from "./chat/Chat";
+import ChatContext from "./chat/ChatContext";
+import Sidebar from "./sidebar/Sidebar";
+import { TiltableSphereAvatar } from "./sidebar/SphereAvatar";
+import Topbar from "./topbar/Topbar";
 
 const OverlayBase = styled.div`
   z-index: 100;
@@ -14,10 +17,7 @@ const OverlayBase = styled.div`
   left: 0;
 `;
 
-const mySpheres = [...Array(10).keys()].reduce(
-  (p) => p.concat(demoSpheres),
-  demoSpheres
-);
+const mySpheres = demoSpheres.concat([Sphere.with({ name: "Goeff" })]);
 
 const Side = ({ spheres, reset }) => (
   <Sidebar reset={reset}>
@@ -28,20 +28,22 @@ const Side = ({ spheres, reset }) => (
 );
 
 const Overlay = ({ timeout, spheres, ...props }) => {
+  const [messages, setMessages] = useState(demoMessages);
   const timeoutEnabled = timeout && timeout > 0;
-
   const [visible, reset] = timeoutEnabled
     ? useActivityTimeout(timeout)
     : [true, () => {}];
 
   return (
-    <Fade in={visible}>
-      <OverlayBase {...props}>
-        <Topbar />
-        <Side reset={reset} />
-        <Chat />
-      </OverlayBase>
-    </Fade>
+    <ChatContext.Provider value={{ messages, setMessages }}>
+      <Fade in={visible}>
+        <OverlayBase {...props}>
+          <Topbar />
+          <Side reset={reset} />
+          <Chat />
+        </OverlayBase>
+      </Fade>
+    </ChatContext.Provider>
   );
 };
 
