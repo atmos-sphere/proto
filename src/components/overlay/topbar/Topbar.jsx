@@ -2,7 +2,7 @@ import { IconButton } from "@material-ui/core";
 import SettingsRoundedIcon from "@material-ui/icons/SettingsRounded";
 import { useState } from "react";
 import styled from "styled-components";
-import { OverlayItem, thickness } from "./OverlayItem";
+import { OverlayItem, thickness } from "../OverlayItem";
 
 const TopbarBase = styled(OverlayItem)`
   height: ${thickness - 1}em;

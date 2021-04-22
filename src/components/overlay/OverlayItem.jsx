@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import defaultTheme from "../../util/styles";
 
 const thickness = 5;
 
@@ -24,7 +25,13 @@ const OverlayItem = styled.div`
     backdrop-filter: blur(15px);
     background-color: rgba(0, 0, 0, 0.5);
   }
+
+  * {
+    font-family: ${({ theme }) => theme.fonts.Rubik};
+  }
 `;
+
+OverlayItem.defaultProps = { theme: defaultTheme };
 
 const hiddenScrollbar = `
   ::-webkit-scrollbar {

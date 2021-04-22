@@ -1,6 +1,7 @@
 import styled from "styled-components";
-import Tiltable from "../Tiltable";
-import { selectable } from "./OverlayItem";
+import defaultTheme from "../../../util/styles";
+import Tiltable from "../../Tiltable";
+import { selectable } from "../OverlayItem";
 
 const AvatarContainer = styled(Tiltable)`
   border-radius: 50%;
@@ -36,9 +37,11 @@ const Avatar = styled.div`
     place-items: center;
 
     font-size: 2rem;
-    font-family: "Rubik", "Cairo", sans-serif;
+    font-family: ${({ theme }) => theme.fonts.Rubik};
   }
 `;
+
+Avatar.defaultProps = { theme: defaultTheme };
 
 const SphereAvatar = ({ sphere, ...props }) => {
   const sphereToImage = ({ name, image }) => (
@@ -55,13 +58,11 @@ const SphereAvatar = ({ sphere, ...props }) => {
   return <Avatar {...props}>{sphereToImage(sphere || {})}</Avatar>;
 };
 
-const TiltableSphereAvatar = ({ sphere, ...props }) => {
-  return (
-    <AvatarContainer degX={14} degY={18} speed={1000} {...props}>
-      <SphereAvatar sphere={sphere} />
-    </AvatarContainer>
-  );
-};
+const TiltableSphereAvatar = ({ sphere, ...props }) => (
+  <AvatarContainer degX={14} degY={18} speed={1000} {...props}>
+    <SphereAvatar sphere={sphere} />
+  </AvatarContainer>
+);
 
 export default SphereAvatar;
 export { SphereAvatar, TiltableSphereAvatar };
