@@ -1,7 +1,6 @@
 import { Fade } from "@material-ui/core";
 import { useState } from "react";
 import styled from "styled-components";
-import { demoMessages } from "../../domain/ChatMessage";
 import { demoSpheres, Sphere } from "../../domain/Sphere";
 import { useActivityTimeout } from "../../util/hooks";
 import Chat from "./chat/Chat";
@@ -28,7 +27,7 @@ const Side = ({ spheres, reset }) => (
 );
 
 const Overlay = ({ timeout, spheres, ...props }) => {
-  const [messages, setMessages] = useState(demoMessages);
+  const [messages, setMessages] = useState([]);
   const timeoutEnabled = timeout && timeout > 0;
   const [visible, reset] = timeoutEnabled
     ? useActivityTimeout(timeout)
@@ -40,7 +39,7 @@ const Overlay = ({ timeout, spheres, ...props }) => {
         <OverlayBase {...props}>
           <Topbar />
           <Side reset={reset} />
-          <Chat />
+          <Chat reset={reset} />
         </OverlayBase>
       </Fade>
     </ChatContext.Provider>
