@@ -47,7 +47,8 @@ export default function Home() {
   return (
     <Container>
       <main>
-        <Overlay timeout={2000} />
+        {/* <Overlay timeout={2000} /> */}
+        <Overlay />
         <Content />
       </main>
     </Container>
