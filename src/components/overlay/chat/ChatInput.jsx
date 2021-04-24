@@ -1,6 +1,6 @@
 import { IconButton, InputBase } from "@material-ui/core";
 import SendRoundedIcon from "@material-ui/icons/SendRounded";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { ChatMessage } from "../../../domain/ChatMessage";
 import ChatContext from "./ChatContext";
@@ -44,14 +44,35 @@ const SendButton = styled(IconButton)`
 const ChatInput = (props) => {
   const [text, setText] = useState("");
   const { messages, setMessages } = useContext(ChatContext);
+  const cleanupChatbot = useRef(null);
+  const responses = ["Hello there, nice to meet you :)", "Yaas", "omg, no way"];
+  const [index, setIndex] = useState(0);
+  const [needToRespond, setNeedToRespond] = useState(false);
+
+  const respond = () => {
+    const msg = responses[index];
+    setIndex((index + 1) % responses.length);
+    setMessages(
+      messages.concat([ChatMessage.with({ text: msg, sentByMe: false })])
+    );
+  };
+
+  if (needToRespond) {
+    setNeedToRespond(false);
+    setTimeout(respond, 1000);
+  }
+
   const sendMessage = () => {
     if (text === "") return;
     setMessages(messages.concat([ChatMessage.with({ text, sentByMe: true })]));
     setText("");
+    setNeedToRespond(true);
   };
 
   const handleTyping = (e) => setText(e.target.value);
   const handleEnterKey = (e) => e.keyCode === 13 && sendMessage();
+
+  useEffect(() => () => cleanupChatbot.current && cleanupChatbot.current(), []);
 
   return (
     <Root>

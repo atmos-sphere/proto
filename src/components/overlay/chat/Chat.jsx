@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "styled-components";
 import { OverlayItem, thickness } from "../OverlayItem";
 import ChatArea from "./ChatArea";
@@ -50,9 +50,25 @@ const ChatContents = ({ minimized, ...props }) => (
   </>
 );
 
-const Chat = ({ className, ...props }) => {
+const Chat = ({ className, reset, ...props }) => {
   const [minimized, setMinimized] = useState(true);
-  const toggleMinimized = () => setMinimized(!minimized);
+  const interval = useRef(null);
+  const resetInterval = () => {
+    if (interval.current) clearInterval(interval.current);
+    interval.current = setInterval(() => {
+      if (minimized) reset();
+    }, 200);
+  };
+
+  const toggleMinimized = () => {
+    setMinimized(!minimized);
+    resetInterval();
+  };
+
+  useEffect(() => {
+    resetInterval();
+    return () => clearInterval(interval.current);
+  }, []);
 
   return (
     <ChatBase $minimized={minimized} className={className} {...props}>
